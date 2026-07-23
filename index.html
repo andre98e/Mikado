@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mikado Skincare | Tienda Oficial K-Beauty & Skincare Coreano en Perú</title>
+  <meta name="description" content="Descubre los mejores productos de skincare coreano 100% originales en Mikado Skincare Perú. Limpiadores, serums, tónicos y protectores solares para lograr la Piel de Cristal (Glass Skin).">
+  <meta name="keywords" content="Mikado Skincare, Skincare Coreano, K-Beauty Peru, Beauty of Joseon, COSRX, Anua, Piel de Cristal, Glass Skin">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Mikado Skincare | Tienda K-Beauty Coreana en Perú">
+  <meta property="og:description" content="Compra tus favoritos de cosmética coreana con envío rápido a todo el Perú o asesoría personalizada por WhatsApp (+51 914 424 034).">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo.png">
+
+  <!-- Google Fonts & FontAwesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    <div class="top-bar-content">
+      <span><i class="fa-solid fa-truck-fast"></i> Envíos GRATIS a todo el Perú por compras desde S/ 199</span>
+      <span><i class="fa-solid fa-certificate"></i> Productos 100% Originales Importados de Corea del Sur</span>
+      <span><i class="fa-brands fa-whatsapp"></i> Asesoría K-Beauty en WhatsApp: <strong>+51 914 424 034</strong></span>
+    </div>
+  </div>
+
+  <!-- Main Header -->
+  <header class="main-header">
+    <div class="header-container">
+      
+      <!-- Brand Logo (Configured for logo.png with Fallback) -->
+      <a href="#" class="logo-wrapper" title="Mikado Skincare Home">
+        <img src="logo.png" alt="Mikado Skincare" class="brand-logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="brand-logo-text-fallback" style="display: none;">
+          <span class="brand-name">Mikado</span>
+          <span class="brand-tagline">Skincare Coreano</span>
+        </div>
+      </a>
+
+      <!-- Search Bar -->
+      <div class="search-container">
+        <div class="search-input-wrapper">
+          <input type="text" id="searchInput" class="search-input" placeholder="Buscar por producto, marca (COSRX, Beauty of Joseon...)" aria-label="Buscar productos">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        </div>
+      </div>
+
+      <!-- Header Actions & WhatsApp Quick Button -->
+      <div class="header-actions">
+        <a href="https://wa.me/51914424034?text=Hola%20Mikado%20Skincare,%20quisiera%20hacer%20una%20consulta%20sobre%20sus%20productos." target="_blank" class="btn-header-ws" title="Consultar por WhatsApp">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span>WhatsApp (+51 914 424 034)</span>
+        </a>
+
+        <button class="action-btn" id="wishlistTrigger" title="Favoritos">
+          <i class="fa-regular fa-heart"></i>
+        </button>
+
+        <button class="action-btn" id="cartTrigger" onclick="openCartDrawer()" title="Carrito de compras">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="badge" id="cartBadge">0</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Navigation Categories Bar -->
+  <nav class="nav-bar">
+    <div class="nav-container">
+      <ul class="nav-list">
+        <li><a href="#catalogo" class="nav-link active" onclick="filterCategory('todos')">🌸 Todos los Productos</a></li>
+        <li><a href="#catalogo" class="nav-link" onclick="filterCategory('limpiadores')">Limpiadores & Aceites</a></li>
+        <li><a href="#catalogo" class="nav-link" onclick="filterCategory('tonicos')">Tónicos & Esencias</a></li>
+        <li><a href="#catalogo" class="nav-link" onclick="filterCategory('serums')">Serums & Ampollas</a></li>
+        <li><a href="#catalogo" class="nav-link" onclick="filterCategory('hidratantes')">Hidratantes & Cremas</a></li>
+        <li><a href="#catalogo" class="nav-link" onclick="filterCategory('mascarillas')">Mascarillas</a></li>
+        <li><a href="#catalogo" class="nav-link" onclick="filterCategory('solares')">Protectores Solares (SPF)</a></li>
+        <li><a href="#rutina" class="nav-link highlight">✨ Rutina Glass Skin (10 Pasos)</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-bg-accent"></div>
+    <div class="hero-container">
+      
+      <div class="hero-content">
+        <span class="hero-badge">
+          <i class="fa-solid fa-sparkles"></i> Secretos de la Belleza Coreana
+        </span>
+        <h1 class="hero-title">
+          Consigue la deseada <span>Piel de Cristal</span>
+        </h1>
+        <p class="hero-subtitle">
+          Descubre fórmulas innovadoras, ingredientes botánicos y la magia del cuidado facial coreano original en <strong>Mikado Skincare</strong>. Envíos a todo el Perú.
+        </p>
+        
+        <div class="hero-actions">
+          <a href="#catalogo" class="btn-primary">
+            <span>Explorar Catálogo</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+          <a href="https://wa.me/51914424034?text=Hola%20Mikado%20Skincare,%20quisiera%20una%20recomendacion%20para%20mi%20tipo%20de%20piel." target="_blank" class="btn-secondary btn-ws-hero">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span>Asesoría por WhatsApp</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-image-wrapper">
+        <div class="hero-img-card">
+          <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=800&q=80" alt="K-Beauty Glass Skin Products Mikado">
+          <div class="hero-floating-tag">
+            <span class="floating-icon">🌸</span>
+            <div>
+              <div class="floating-title">100% Auténtico de Seúl</div>
+              <div class="floating-sub">Beauty of Joseon, COSRX, Anua</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Feature Badges Section -->
+  <section class="features-bar">
+    <div class="features-container">
+      <div class="feature-item">
+        <div class="feature-icon-box"><i class="fa-solid fa-box-open"></i></div>
+        <div class="feature-info">
+          <h4>Envío Rápido Perú</h4>
+          <p>Entregas seguras en Lima y provincias</p>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon-box"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="feature-info">
+          <h4>Garantía de Originalidad</h4>
+          <p>Importados directamente de Corea</p>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon-box"><i class="fa-brands fa-whatsapp"></i></div>
+        <div class="feature-info">
+          <h4>Atención WhatsApp 24/7</h4>
+          <p>Consultas al +51 914 424 034</p>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="feature-icon-box"><i class="fa-solid fa-heart-pulse"></i></div>
+        <div class="feature-info">
+          <h4>Rutinas Personalizadas</h4>
+          <p>Asesoría según tu tipo de piel</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10-Step Korean Routine Section -->
+  <section class="routine-section" id="rutina">
+    <div class="section-header">
+      <span class="section-subtitle">Aprende con Mikado Skincare</span>
+      <h2 class="section-title">Los 10 Pasos de la Rutina Coreana</h2>
+      <p class="section-desc">
+        La clave del K-Beauty no radica en cubrir imperfecciones, sino en restaurar la salud natural, hidratación y luminosidad de tu rostro paso a paso.
+      </p>
+    </div>
+
+    <div class="routine-steps-grid">
+      <div class="step-card">
+        <span class="step-number">01</span>
+        <span class="step-icon">🧴</span>
+        <h4 class="step-title">Aceite Limpiador</h4>
+        <p class="step-desc">Remueve maquillaje y sebo profundo</p>
+      </div>
+
+      <div class="step-card">
+        <span class="step-number">02</span>
+        <span class="step-icon">🫧</span>
+        <h4 class="step-title">Limpiador Acuoso</h4>
+        <p class="step-desc">Limpia impurezas a base de agua</p>
+      </div>
+
+      <div class="step-card">
+        <span class="step-number">03</span>
+        <span class="step-icon">✨</span>
+        <h4 class="step-title">Exfoliante Suave</h4>
+        <p class="step-desc">Elimina células muertas (1-2 veces/sem)</p>
+      </div>
+
+      <div class="step-card">
+        <span class="step-number">04</span>
+        <span class="step-icon">💧</span>
+        <h4 class="step-title">Tónico Hidratante</h4>
+        <p class="step-desc">Equilibra el pH y prepara la piel</p>
+      </div>
+
+      <div class="step-card">
+        <span class="step-number">05</span>
+        <span class="step-icon">🌸</span>
+        <h4 class="step-title">Esencia Facial</h4>
+        <p class="step-desc">Potencia la regeneración celular</p>
+      </div>
+
+      <div class="step-card">
+        <span class="step-number">06</span>
+        <span class="step-icon">🧪</span>
+        <h4 class="step-title">Serum / Ampolla</h4>
+        <p class="step-desc">Trata manchitas, acné o líneas de expresión</p>
+      </div>
+
+      <div class="step-card">
+        <span class="step-number">07</span>
+        <span class="step-icon">🧖‍♀️</span>
+        <h4 class="step-title">Mascarilla de Tela</h4>
+        <p class="step-desc">Chute concentrado de hidratación</p>
+      </div>
+
+      <div class="step-card">
+        <span class="step-number">08</span>
+        <span class="step-icon">👁️</span>
+        <h4 class="step-title">Contorno de Ojos</h4>
+        <p class="step-desc">Nutre la zona delicada de la mirada</p>
+      </div>
+
+      <div class="step-card">
+        <span class="step-number">09</span>
+        <span class="step-icon">🍦</span>
+        <h4 class="step-title">Crema Hidratante</h4>
+        <p class="step-desc">Sella la humedad y protege la barrera</p>
+      </div>
+
+      <div class="step-card">
+        <span class="step-number">10</span>
+        <span class="step-icon">☀️</span>
+        <h4 class="step-title">Protector Solar (SPF)</h4>
+        <p class="step-desc">Paso infaltable para prevenir envejecimiento</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Catalog Section -->
+  <section class="products-section" id="catalogo">
+    <div class="section-header">
+      <span class="section-subtitle">Catálogo Exclusivo</span>
+      <h2 class="section-title">Tus Favoritos de Corea del Sur</h2>
+      <p class="section-desc">Selección curada con los productos más recomendados por dermatólogos y virales en redes sociales.</p>
+    </div>
+
+    <!-- Category Tabs Filter -->
+    <div class="category-tabs">
+      <button class="tab-btn active" data-category="todos">Todos</button>
+      <button class="tab-btn" data-category="solares">Protectores Solares</button>
+      <button class="tab-btn" data-category="serums">Serums & Esencias</button>
+      <button class="tab-btn" data-category="tonicos">Tónicos</button>
+      <button class="tab-btn" data-category="limpiadores">Limpiadores</button>
+      <button class="tab-btn" data-category="hidratantes">Hidratantes</button>
+      <button class="tab-btn" data-category="mascarillas">Mascarillas</button>
+    </div>
+
+    <!-- Products Grid (Rendered via script.js) -->
+    <div class="products-grid" id="productsGrid">
+      <!-- Dynamic Products -->
+    </div>
+  </section>
+
+  <!-- WhatsApp Custom Routine Banner -->
+  <section class="ws-banner-section">
+    <div class="ws-banner-card">
+      <div class="ws-banner-content">
+        <h3>¿No sabes qué productos necesita tu piel? 🌸</h3>
+        <p>
+          Habla directamente con nuestras asesoras de <strong>Mikado Skincare</strong>. Te ayudamos a armar tu rutina personalizada según tu tipo de piel (Grasa, Mixta, Seca o Sensible) sin costo alguno.
+        </p>
+      </div>
+      <a href="https://wa.me/51914424034?text=Hola%20Mikado%20Skincare,%20me%20gustaria%20recibir%20asesoria%20personalizada%20para%20mi%20piel." target="_blank" class="btn-ws-banner">
+        <i class="fa-brands fa-whatsapp" style="font-size: 1.4rem;"></i>
+        <span>Asesoría por WhatsApp (+51 914 424 034)</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Reviews & Testimonials Section -->
+  <section class="reviews-section">
+    <div class="section-header">
+      <span class="section-subtitle">Experiencias Reales</span>
+      <h2 class="section-title">Lo que dicen nuestras clientas Mikado</h2>
+    </div>
+
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-header">
+          <div class="review-avatar">M</div>
+          <div>
+            <div class="review-author">Milagros C. (Lima)</div>
+            <div class="review-tag"><i class="fa-solid fa-circle-check"></i> Comprador verificado</div>
+          </div>
+        </div>
+        <p class="review-text">
+          "El protector solar de Beauty of Joseon es una maravilla total. Llegó al día siguiente de pedirlo por WhatsApp. Mikado Skincare 100% recomendado."
+        </p>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <div class="review-avatar">V</div>
+          <div>
+            <div class="review-author">Valeria G. (Arequipa)</div>
+            <div class="review-tag"><i class="fa-solid fa-circle-check"></i> Comprador verificado</div>
+          </div>
+        </div>
+        <p class="review-text">
+          "Me asesoraron por WhatsApp super amable para mi problema de acné y el tónico de Anua cambió el aspecto de mi piel en solo una semana."
+        </p>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <div class="review-avatar">K</div>
+          <div>
+            <div class="review-author">Karen S. (Trujillo)</div>
+            <div class="review-tag"><i class="fa-solid fa-circle-check"></i> Comprador verificado</div>
+          </div>
+        </div>
+        <p class="review-text">
+          "Tenía miedo de que los productos no fueran originales, pero todo vino sellado, con su fecha de vencimiento lejana y muestras de regalo. ¡Amé!"
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cart Slide-out Drawer -->
+  <div class="cart-overlay" id="cartOverlay" onclick="closeCartDrawer()"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h3><i class="fa-solid fa-bag-shopping"></i> Tu Carrito K-Beauty</h3>
+      <button class="close-cart-btn" onclick="closeCartDrawer()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div class="cart-shipping-notice">
+      ✨ Completa S/ 199 para obtener <strong>Envío Gratis</strong>
+    </div>
+
+    <div class="cart-body" id="cartBody">
+      <!-- Cart Items Rendered via script.js -->
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-summary-row">
+        <span>Subtotal:</span>
+        <span id="cartSubtotal">S/ 0.00</span>
+      </div>
+      <div class="cart-summary-row total">
+        <span>Total:</span>
+        <span id="cartTotal">S/ 0.00</span>
+      </div>
+
+      <button class="btn-checkout-ws" onclick="checkoutViaWhatsApp()">
+        <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem;"></i>
+        <span>Finalizar Pedido por WhatsApp</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Quick View Modal -->
+  <div class="modal-overlay" id="quickViewModal" onclick="if(event.target === this) closeQuickView()">
+    <div class="modal-content">
+      <button class="close-modal-btn" onclick="closeQuickView()"><i class="fa-solid fa-xmark"></i></button>
+      
+      <div class="modal-img-box">
+        <img id="modalImg" src="" alt="Detalle del producto">
+      </div>
+
+      <div class="modal-details">
+        <span class="modal-brand" id="modalBrand">Marca</span>
+        <h2 class="modal-title" id="modalTitle">Título del producto</h2>
+        <div class="modal-price" id="modalPrice">S/ 0.00</div>
+        <p class="modal-desc" id="modalDesc">Descripción detallada del producto.</p>
+        
+        <div class="modal-actions">
+          <button class="btn-primary" id="modalAddBtn" style="width: 100%;">
+            <i class="fa-solid fa-bag-shopping"></i> Agregar al Carrito
+          </button>
+          <a class="btn-secondary btn-ws-hero" id="modalWsBtn" href="#" target="_blank" style="width: 100%; justify-content: center;">
+            <i class="fa-brands fa-whatsapp"></i> Consulta Rápida por WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Sticky WhatsApp Widget (+51 914 424 034) -->
+  <a href="https://wa.me/51914424034?text=Hola%20Mikado%20Skincare,%20deseo%20hacer%20una%20consulta%20o%20pedido." target="_blank" class="ws-floating-btn" title="Contactar a WhatsApp Empresarial">
+    <div class="ws-icon-circle">
+      <i class="fa-brands fa-whatsapp"></i>
+    </div>
+    <div class="ws-floating-text">
+      <span class="ws-floating-title">¿Dudas o compras?</span>
+      <span class="ws-floating-sub">WhatsApp +51 914 424 034</span>
+    </div>
+  </a>
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      
+      <div class="footer-brand">
+        <!-- Logo configured for logo.png -->
+        <a href="#" class="logo-wrapper">
+          <img src="logo.png" alt="Mikado Skincare" class="brand-logo-img" style="height: 48px;" onerror="this.style.display='none';">
+          <div class="brand-logo-text-fallback">
+            <span class="brand-name" style="color:#FFF;">Mikado</span>
+            <span class="brand-tagline">Skincare Coreano</span>
+          </div>
+        </a>
+        <p>
+          Tu destino de belleza en Perú para conseguir los mejores cosméticos y tratamientos de cuidado facial importados directamente de Corea del Sur.
+        </p>
+      </div>
+
+      <div class="footer-column">
+        <h4>Categorías</h4>
+        <ul class="footer-links">
+          <li><a href="#catalogo">Protectores Solares</a></li>
+          <li><a href="#catalogo">Serums & Esencias</a></li>
+          <li><a href="#catalogo">Tónicos Calmantes</a></li>
+          <li><a href="#catalogo">Aceites Limpiadores</a></li>
+          <li><a href="#catalogo">Cremas Hidratantes</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Mikado</h4>
+        <ul class="footer-links">
+          <li><a href="#rutina">Rutina Coreana 10 Pasos</a></li>
+          <li><a href="#catalogo">Bestsellers Virales</a></li>
+          <li><a href="#">Preguntas Frecuentes</a></li>
+          <li><a href="#">Términos & Condiciones</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Contacto & Ventas</h4>
+        <div class="footer-contact-item">
+          <i class="fa-brands fa-whatsapp" style="color: #25D366; font-size: 1.2rem;"></i>
+          <span>+51 914 424 034</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-envelope" style="color: var(--clr-primary);"></i>
+          <span>contacto@mikadoskincare.pe</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-location-dot" style="color: var(--clr-accent);"></i>
+          <span>Lima, Perú (Envíos a todo el país)</span>
+        </div>
+
+        <div style="margin-top: 18px; display: flex; gap: 12px; font-size: 1.4rem;">
+          <a href="#" style="color:#B5AEA7;"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" style="color:#B5AEA7;"><i class="fa-brands fa-tiktok"></i></a>
+          <a href="#" style="color:#B5AEA7;"><i class="fa-brands fa-facebook"></i></a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 2026 Mikado Skincare. Todos los derechos reservados.</div>
+      <div>
+        <span>Medios de Pago Aceptados: Yape | Plin | Tarjeta de Crédito/Débito | Transferencia BCP/BBVA</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- App Catalog & Script -->
+  <script src="products.js"></script>
+  <script src="script.js"></script>
+
+  <script>
+    // Helper to switch category from navbar link
+    function filterCategory(cat) {
+      const tabs = document.querySelectorAll(".tab-btn");
+      tabs.forEach(t => {
+        if (t.getAttribute("data-category") === cat) {
+          t.click();
+        }
+      });
+    }
+  </script>
+</body>
+</html>
