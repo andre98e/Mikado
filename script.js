@@ -53,7 +53,11 @@ function renderProducts(itemsToRender = PRODUCTS) {
     return;
   }
 
-  container.innerHTML = itemsToRender.map(product => `
+  container.innerHTML = itemsToRender.map(product => {
+    const rawRating = product.rating !== undefined ? product.rating : product.reviews;
+    const ratingVal = rawRating ? Number(rawRating).toFixed(1) : (4.5 + ((product.id || 1) * 0.17) % 0.5).toFixed(1);
+
+    return `
     <div class="product-card" data-id="${product.id}">
       <div class="product-badge-group">
         ${product.badge ? `<span class="badge-tag ${product.badgeClass}">${product.badge}</span>` : ''}
@@ -82,7 +86,7 @@ function renderProducts(itemsToRender = PRODUCTS) {
           <i class="fa-solid fa-star"></i>
           <i class="fa-solid fa-star"></i>
           <i class="fa-solid fa-star"></i>
-          <span class="rating-count">(${product.reviews})</span>
+          <span class="rating-count">(${ratingVal})</span>
         </div>
 
         <div class="product-price-row">
@@ -100,7 +104,8 @@ function renderProducts(itemsToRender = PRODUCTS) {
         </div>
       </div>
     </div>
-  `).join("");
+  `;
+  }).join("");
 }
 
 // Generate WhatsApp Direct Product Link
@@ -276,6 +281,13 @@ function openQuickView(productId) {
   document.getElementById("modalTitle").textContent = product.title;
   document.getElementById("modalPrice").textContent = `S/ ${product.price.toFixed(2)}`;
   document.getElementById("modalDesc").textContent = product.desc;
+  
+  const rawRating = product.rating !== undefined ? product.rating : product.reviews;
+  const ratingVal = rawRating ? Number(rawRating).toFixed(1) : (4.5 + ((product.id || 1) * 0.17) % 0.5).toFixed(1);
+  const modalRatingElem = document.getElementById("modalRatingVal");
+  if (modalRatingElem) {
+    modalRatingElem.textContent = `(${ratingVal})`;
+  }
   
   const addBtn = document.getElementById("modalAddBtn");
   if (addBtn) {

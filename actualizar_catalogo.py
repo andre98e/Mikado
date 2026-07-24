@@ -3,6 +3,8 @@ import json
 import shutil
 import time
 import openpyxl
+import random
+import hashlib
 
 def sync_catalog():
     excel_path = "catalogo_mikado.xlsx"
@@ -118,6 +120,11 @@ def sync_catalog():
         if not image_path:
             image_path = f"imagenes_productos/{codigo}.png"
 
+        # Generate fixed random rating between 4.5 and 5.0 based on product SKU code
+        seed_val = int(hashlib.md5(codigo.encode('utf-8')).hexdigest(), 16)
+        rng = random.Random(seed_val)
+        rating = round(rng.uniform(4.5, 5.0), 1)
+
         product_obj = {
             "id": idx,
             "codigo": codigo,
@@ -128,6 +135,8 @@ def sync_catalog():
             "oldPrice": old_price,
             "stock": stock,
             "discount": descuento,
+            "rating": rating,
+            "reviews": rating,
             "badge": "En Stock" if stock > 0 else "Agotado",
             "badgeClass": "sale" if old_price else ("accent" if stock > 0 else ""),
             "img": image_path,

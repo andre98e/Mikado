@@ -1,5 +1,5 @@
 // Auto-generated catalog from catalogo_mikado.xlsx
-const CATALOG_TIMESTAMP = 1784852422;
+const CATALOG_TIMESTAMP = 1784855699;
 const PRODUCTS_DATA = [
   {
     "id": 1,
@@ -11,6 +11,8 @@ const PRODUCTS_DATA = [
     "oldPrice": 79.0,
     "stock": 25,
     "discount": 0.15,
+    "rating": 5.0,
+    "reviews": 5.0,
     "badge": "En Stock",
     "badgeClass": "sale",
     "img": "imagenes_productos/MKD-001.jpg",
@@ -26,6 +28,8 @@ const PRODUCTS_DATA = [
     "oldPrice": 85.0,
     "stock": 18,
     "discount": 0.1,
+    "rating": 4.6,
+    "reviews": 4.6,
     "badge": "En Stock",
     "badgeClass": "sale",
     "img": "imagenes_productos/MKD-002.jpg",
@@ -41,6 +45,8 @@ const PRODUCTS_DATA = [
     "oldPrice": null,
     "stock": 30,
     "discount": 0.0,
+    "rating": 4.8,
+    "reviews": 4.8,
     "badge": "En Stock",
     "badgeClass": "accent",
     "img": "imagenes_productos/MKD-003.webp",
@@ -56,6 +62,8 @@ const PRODUCTS_DATA = [
     "oldPrice": 92.0,
     "stock": 12,
     "discount": 0.05,
+    "rating": 4.5,
+    "reviews": 4.5,
     "badge": "En Stock",
     "badgeClass": "sale",
     "img": "imagenes_productos/MKD-004.webp",
@@ -71,6 +79,8 @@ const PRODUCTS_DATA = [
     "oldPrice": 75.0,
     "stock": 40,
     "discount": 0.1,
+    "rating": 4.8,
+    "reviews": 4.8,
     "badge": "En Stock",
     "badgeClass": "sale",
     "img": "imagenes_productos/MKD-005.webp",
@@ -79,13 +89,15 @@ const PRODUCTS_DATA = [
   {
     "id": 6,
     "codigo": "MKD-006",
-    "brand": "Skin",
+    "brand": "Skinc",
     "title": "Pure Cleansing Oil 200ml",
     "category": "limpiadores",
     "price": 98.0,
     "oldPrice": null,
     "stock": 15,
     "discount": 0.0,
+    "rating": 4.6,
+    "reviews": 4.6,
     "badge": "En Stock",
     "badgeClass": "accent",
     "img": "imagenes_productos/MKD-006.webp",
