@@ -1,5 +1,5 @@
 // Auto-generated catalog from catalogo_mikado.xlsx
-const CATALOG_TIMESTAMP = 1784855699;
+const CATALOG_TIMESTAMP = 1784857378;
 const PRODUCTS_DATA = [
   {
     "id": 1,
@@ -89,7 +89,7 @@ const PRODUCTS_DATA = [
   {
     "id": 6,
     "codigo": "MKD-006",
-    "brand": "Skinc",
+    "brand": "Tocobo",
     "title": "Pure Cleansing Oil 200ml",
     "category": "limpiadores",
     "price": 98.0,

@@ -27,6 +27,7 @@ let currentCategory = "todos";
 
 // DOM Elements
 document.addEventListener("DOMContentLoaded", () => {
+  renderCategoryTabs();
   renderProducts();
   setupEventListeners();
   updateCartUI();
@@ -114,20 +115,66 @@ function getWhatsAppProductUrl(product) {
   return "https://wa.me/" + PHONE_WHATSAPP + "?text=" + encodeURIComponent(text);
 }
 
+// Render Category Tabs Dynamically
+function renderCategoryTabs() {
+  const container = document.querySelector(".category-tabs");
+  if (!container) return;
+
+  // Predefined list of category IDs and display names
+  const predefinedNames = {
+    solares: "Protectores Solares",
+    serums: "Serums & Esencias",
+    tonicos: "Tónicos",
+    limpiadores: "Limpiadores",
+    hidratantes: "Hidratantes",
+    mascarillas: "Mascarillas"
+  };
+
+  // Start with predefined categories
+  const categories = new Set(Object.keys(predefinedNames));
+
+  // Add any extra categories present in the products data
+  PRODUCTS.forEach(p => {
+    if (p.category) {
+      const catKey = p.category.toLowerCase().trim();
+      if (catKey) {
+        categories.add(catKey);
+      }
+    }
+  });
+
+  // Generate HTML
+  let html = `<button class="tab-btn ${currentCategory === 'todos' ? 'active' : ''}" data-category="todos">Todos</button>`;
+  
+  categories.forEach(cat => {
+    const displayName = predefinedNames[cat] 
+      ? predefinedNames[cat] 
+      : (cat.charAt(0).toUpperCase() + cat.slice(1));
+      
+    html += `<button class="tab-btn ${currentCategory === cat ? 'active' : ''}" data-category="${cat}">${displayName}</button>`;
+  });
+
+  container.innerHTML = html;
+}
+
 // Event Listeners Setup
 function setupEventListeners() {
-  // Category Tabs
-  const tabs = document.querySelectorAll(".tab-btn");
-  tabs.forEach(tab => {
-    tab.addEventListener("click", (e) => {
-      tabs.forEach(t => t.classList.remove("active"));
-      e.target.classList.add("active");
+  // Category Tabs (using delegation since tabs are dynamic)
+  const container = document.querySelector(".category-tabs");
+  if (container) {
+    container.addEventListener("click", (e) => {
+      const tab = e.target.closest(".tab-btn");
+      if (!tab) return;
       
-      const cat = e.target.getAttribute("data-category");
+      const tabs = container.querySelectorAll(".tab-btn");
+      tabs.forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+      
+      const cat = tab.getAttribute("data-category");
       currentCategory = cat;
       filterProducts();
     });
-  });
+  }
 
   // Search Input
   const searchInput = document.getElementById("searchInput");

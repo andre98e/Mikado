@@ -5,6 +5,7 @@ import time
 import openpyxl
 import random
 import hashlib
+import unicodedata
 
 def sync_catalog():
     excel_path = "catalogo_mikado.xlsx"
@@ -71,7 +72,36 @@ def sync_catalog():
         codigo = str(row[0]).strip() if row[0] else f"MKD-{idx:03d}"
         marca = str(row[1]).strip() if row[1] else "Mikado"
         producto = str(row[2]).strip() if row[2] else "Producto K-Beauty"
-        categoria = str(row[3]).strip().lower() if row[3] else "otros"
+        
+        raw_categoria = str(row[3]).strip().lower() if row[3] else "otros"
+        
+        # Normalize category to map variations (like singular/plural/synonyms) to standard categories
+        normalized_cat = "".join(c for c in unicodedata.normalize('NFD', raw_categoria) if unicodedata.category(c) != 'Mn')
+        categoria = raw_categoria
+        
+        category_mappings = {
+            "limpiadores": ["limpiadores", "limpiador", "cleanser", "cleansers", "aceite limpiador", "aceites", "limpieza", "aceite", "cleansing"],
+            "tonicos": ["tonicos", "tonico", "toner", "toners"],
+            "serums": ["serums", "serum", "esencia", "esencias", "ampolla", "ampollas", "essence", "ampoule", "ampoules"],
+            "hidratantes": ["hidratantes", "hidratante", "crema", "cremas", "cream", "moisturizer", "moisturizers"],
+            "mascarillas": ["mascarillas", "mascarilla", "mask", "masks"],
+            "solares": ["solares", "solar", "protector solar", "protectores solares", "sunscreen", "spf", "bloqueador", "bloqueadores", "bloqueador solar"]
+        }
+        
+        # 1. Try exact match first
+        matched = False
+        for target, variations in category_mappings.items():
+            if normalized_cat in variations:
+                categoria = target
+                matched = True
+                break
+        
+        # 2. Try substring containment if no exact match was found
+        if not matched:
+            for target, variations in category_mappings.items():
+                if any(v in normalized_cat for v in variations):
+                    categoria = target
+                    break
         
         try:
             precio = float(row[4]) if row[4] is not None else 0.0
