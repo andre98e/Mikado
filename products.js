@@ -1,5 +1,5 @@
 // Auto-generated catalog from catalogo_mikado.xlsx
-const CATALOG_TIMESTAMP = 1784848017;
+const CATALOG_TIMESTAMP = 1784852422;
 const PRODUCTS_DATA = [
   {
     "id": 1,
@@ -79,7 +79,7 @@ const PRODUCTS_DATA = [
   {
     "id": 6,
     "codigo": "MKD-006",
-    "brand": "Pokemon",
+    "brand": "Skin",
     "title": "Pure Cleansing Oil 200ml",
     "category": "limpiadores",
     "price": 98.0,
