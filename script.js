@@ -24,6 +24,8 @@ const PRODUCTS = (typeof PRODUCTS_DATA !== "undefined" && PRODUCTS_DATA.length >
 // App State
 let cart = [];
 let currentCategory = "todos";
+const PRODUCTS_PER_PAGE = 24;
+let currentPage = 1;
 
 // DOM Elements
 document.addEventListener("DOMContentLoaded", () => {
@@ -43,6 +45,8 @@ function renderProducts(itemsToRender = PRODUCTS) {
   const container = document.getElementById("productsGrid");
   if (!container) return;
 
+  const paginationContainer = document.getElementById("paginationContainer");
+
   if (itemsToRender.length === 0) {
     container.innerHTML = `
       <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--clr-text-muted);">
@@ -51,17 +55,33 @@ function renderProducts(itemsToRender = PRODUCTS) {
         <p>Intenta con otra búsqueda o categoría.</p>
       </div>
     `;
+    if (paginationContainer) paginationContainer.innerHTML = "";
     return;
   }
 
-  container.innerHTML = itemsToRender.map(product => {
+  // Ensure current page is valid
+  const totalPages = Math.ceil(itemsToRender.length / PRODUCTS_PER_PAGE);
+  if (currentPage > totalPages) {
+    currentPage = 1;
+  } else if (currentPage < 1) {
+    currentPage = 1;
+  }
+
+  const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
+  const endIndex = startIndex + PRODUCTS_PER_PAGE;
+  const paginatedItems = itemsToRender.slice(startIndex, endIndex);
+
+  container.innerHTML = paginatedItems.map(product => {
     const rawRating = product.rating !== undefined ? product.rating : product.reviews;
     const ratingVal = rawRating ? Number(rawRating).toFixed(1) : (4.5 + ((product.id || 1) * 0.17) % 0.5).toFixed(1);
+    const isOutOfStock = product.stock !== undefined && product.stock <= 0;
+    const badgeLabel = isOutOfStock ? "Agotado" : product.badge;
+    const badgeCss = isOutOfStock ? "badge-out-of-stock" : product.badgeClass;
 
     return `
-    <div class="product-card" data-id="${product.id}">
+    <div class="product-card ${isOutOfStock ? 'is-out-of-stock' : ''}" data-id="${product.id}">
       <div class="product-badge-group">
-        ${product.badge ? `<span class="badge-tag ${product.badgeClass}">${product.badge}</span>` : ''}
+        ${badgeLabel ? `<span class="badge-tag ${badgeCss}">${badgeLabel}</span>` : ''}
       </div>
       
       <button class="wishlist-btn" onclick="toggleWishlist(this, ${product.id})" title="Añadir a favoritos">
@@ -96,9 +116,15 @@ function renderProducts(itemsToRender = PRODUCTS) {
         </div>
 
         <div class="product-card-actions">
-          <button class="btn-add-cart" onclick="addToCart(${product.id})">
-            <i class="fa-solid fa-bag-shopping"></i> Agregar
-          </button>
+          ${isOutOfStock ? `
+            <button class="btn-add-cart disabled" disabled title="Producto Agotado">
+              <i class="fa-solid fa-ban"></i> Agotado
+            </button>
+          ` : `
+            <button class="btn-add-cart" onclick="addToCart(${product.id})">
+              <i class="fa-solid fa-bag-shopping"></i> Agregar
+            </button>
+          `}
           <a class="btn-card-ws" href="${getWhatsAppProductUrl(product)}" target="_blank" title="Consultar o Comprar por WhatsApp">
             <i class="fa-brands fa-whatsapp"></i>
           </a>
@@ -107,6 +133,55 @@ function renderProducts(itemsToRender = PRODUCTS) {
     </div>
   `;
   }).join("");
+
+  renderPagination(itemsToRender.length);
+}
+
+// Render Pagination Controls
+function renderPagination(totalItems) {
+  const container = document.getElementById("paginationContainer");
+  if (!container) return;
+
+  const totalPages = Math.ceil(totalItems / PRODUCTS_PER_PAGE);
+
+  if (totalPages <= 1) {
+    container.innerHTML = "";
+    return;
+  }
+
+  let html = "";
+
+  // Previous button
+  html += `
+    <button class="pagination-btn" ${currentPage === 1 ? "disabled" : ""} onclick="changePage(${currentPage - 1})" title="Página Anterior">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+  `;
+
+  // Page numbers
+  for (let i = 1; i <= totalPages; i++) {
+    html += `
+      <button class="pagination-btn ${currentPage === i ? "active" : ""}" onclick="changePage(${i})">
+        ${i}
+      </button>
+    `;
+  }
+
+  // Next button
+  html += `
+    <button class="pagination-btn" ${currentPage === totalPages ? "disabled" : ""} onclick="changePage(${currentPage + 1})" title="Página Siguiente">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+  `;
+
+  container.innerHTML = html;
+}
+
+// Change Page function
+function changePage(newPage) {
+  currentPage = newPage;
+  filterProducts(false);
+  document.getElementById("catalogo")?.scrollIntoView({ behavior: "smooth" });
 }
 
 // Generate WhatsApp Direct Product Link
@@ -186,7 +261,10 @@ function setupEventListeners() {
 }
 
 // Filter Logic (Category + Search)
-function filterProducts() {
+function filterProducts(resetPage = true) {
+  if (resetPage) {
+    currentPage = 1;
+  }
   const query = (document.getElementById("searchInput")?.value || "").toLowerCase().trim();
   
   const filtered = PRODUCTS.filter(p => {
@@ -207,8 +285,17 @@ function addToCart(productId) {
   const product = PRODUCTS.find(p => p.id === productId);
   if (!product) return;
 
+  if (product.stock !== undefined && product.stock <= 0) {
+    alert("Lo sentimos, este producto se encuentra agotado actualmente.");
+    return;
+  }
+
   const existing = cart.find(item => item.id === productId);
   if (existing) {
+    if (product.stock !== undefined && existing.qty >= product.stock) {
+      alert(`Stock máximo disponible (${product.stock} unidades) ya alcanzado en tu carrito.`);
+      return;
+    }
     existing.qty += 1;
   } else {
     cart.push({ ...product, qty: 1 });
@@ -221,6 +308,14 @@ function addToCart(productId) {
 function updateQty(productId, delta) {
   const item = cart.find(i => i.id === productId);
   if (!item) return;
+
+  if (delta > 0) {
+    const product = PRODUCTS.find(p => p.id === productId);
+    if (product && product.stock !== undefined && item.qty >= product.stock) {
+      alert(`Stock máximo disponible (${product.stock} unidades) alcanzado.`);
+      return;
+    }
+  }
 
   item.qty += delta;
   if (item.qty <= 0) {
@@ -336,12 +431,23 @@ function openQuickView(productId) {
     modalRatingElem.textContent = `(${ratingVal})`;
   }
   
+  const isOutOfStock = product.stock !== undefined && product.stock <= 0;
   const addBtn = document.getElementById("modalAddBtn");
   if (addBtn) {
-    addBtn.onclick = () => {
-      addToCart(product.id);
-      closeQuickView();
-    };
+    if (isOutOfStock) {
+      addBtn.disabled = true;
+      addBtn.classList.add("disabled");
+      addBtn.innerHTML = `<i class="fa-solid fa-ban"></i> Agotado`;
+      addBtn.onclick = null;
+    } else {
+      addBtn.disabled = false;
+      addBtn.classList.remove("disabled");
+      addBtn.innerHTML = `<i class="fa-solid fa-bag-shopping"></i> Agregar al Carrito`;
+      addBtn.onclick = () => {
+        addToCart(product.id);
+        closeQuickView();
+      };
+    }
   }
 
   const wsBtn = document.getElementById("modalWsBtn");
