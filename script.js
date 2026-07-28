@@ -259,12 +259,32 @@ function setupEventListeners() {
     });
   }
 
-  // Search Input
+  // Search Input & Search Icon
   const searchInput = document.getElementById("searchInput");
+  const searchIcon = document.querySelector(".search-icon");
+
+  function handleSearchSubmit() {
+    filterProducts();
+    document.getElementById("catalogo")?.scrollIntoView({ behavior: "smooth" });
+    if (searchInput) searchInput.blur();
+  }
+
   if (searchInput) {
     searchInput.addEventListener("input", (e) => {
       filterProducts();
     });
+
+    searchInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        handleSearchSubmit();
+      }
+    });
+  }
+
+  if (searchIcon) {
+    searchIcon.style.cursor = "pointer";
+    searchIcon.addEventListener("click", handleSearchSubmit);
   }
 
   // Window Resize (Recalculate items per page if switching between mobile/desktop)
