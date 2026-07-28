@@ -262,10 +262,15 @@ function setupEventListeners() {
   // Search Input & Search Icon
   const searchInput = document.getElementById("searchInput");
   const searchIcon = document.querySelector(".search-icon");
+  let lastScrolledSearchValue = "";
 
   function handleSearchSubmit() {
     filterProducts();
-    document.getElementById("catalogo")?.scrollIntoView({ behavior: "smooth" });
+    const query = (searchInput?.value || "").trim();
+    if (query) {
+      lastScrolledSearchValue = query;
+      document.getElementById("catalogo")?.scrollIntoView({ behavior: "smooth" });
+    }
     if (searchInput) searchInput.blur();
   }
 
@@ -278,6 +283,16 @@ function setupEventListeners() {
       if (e.key === "Enter") {
         e.preventDefault();
         handleSearchSubmit();
+      }
+    });
+
+    // When user finishes typing and clicks outside (loses focus / change event)
+    searchInput.addEventListener("change", () => {
+      const query = searchInput.value.trim();
+      if (query && query !== lastScrolledSearchValue) {
+        lastScrolledSearchValue = query;
+        filterProducts();
+        document.getElementById("catalogo")?.scrollIntoView({ behavior: "smooth" });
       }
     });
   }
