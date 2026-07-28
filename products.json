@@ -64,7 +64,7 @@
     "reviews": 4.5,
     "badge": "Agotado",
     "badgeClass": "sale",
-    "img": "imagenes_productos/MKD-004.webp",
+    "img": "imagenes_productos/MKD-004.jpg",
     "desc": "Serum concentrado 100% Centella Asiática. Calma e hidrata intensamente."
   },
   {
@@ -319,7 +319,7 @@
     "reviews": 4.8,
     "badge": "En Stock",
     "badgeClass": "sale",
-    "img": "imagenes_productos/MKD-019.jpg",
+    "img": "imagenes_productos/MKD-019.webp",
     "desc": "Ampolla nutritiva concentrada con extracto de superalimento Noni en presentación compacta. Aporta un alivio inmediato a la piel sensible, fortalece la barrera cutánea y proporciona una luminosidad saludable."
   },
   {

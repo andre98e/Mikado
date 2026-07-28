@@ -1,5 +1,5 @@
 // Auto-generated catalog from catalogo_mikado.xlsx
-const CATALOG_TIMESTAMP = 1785265471;
+const CATALOG_TIMESTAMP = 1785266314;
 const PRODUCTS_DATA = [
   {
     "id": 1,
@@ -66,7 +66,7 @@ const PRODUCTS_DATA = [
     "reviews": 4.5,
     "badge": "Agotado",
     "badgeClass": "sale",
-    "img": "imagenes_productos/MKD-004.webp",
+    "img": "imagenes_productos/MKD-004.jpg",
     "desc": "Serum concentrado 100% Centella Asiática. Calma e hidrata intensamente."
   },
   {
@@ -321,7 +321,7 @@ const PRODUCTS_DATA = [
     "reviews": 4.8,
     "badge": "En Stock",
     "badgeClass": "sale",
-    "img": "imagenes_productos/MKD-019.jpg",
+    "img": "imagenes_productos/MKD-019.webp",
     "desc": "Ampolla nutritiva concentrada con extracto de superalimento Noni en presentación compacta. Aporta un alivio inmediato a la piel sensible, fortalece la barrera cutánea y proporciona una luminosidad saludable."
   },
   {

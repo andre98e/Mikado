@@ -40,6 +40,11 @@ function getProductImageFallback(cat) {
   return DEFAULT_PLACEHOLDERS[cat] || DEFAULT_PLACEHOLDERS.default;
 }
 
+// Dynamic Products Per Page helper (12 on mobile <= 768px, 24 on desktop)
+function getProductsPerPage() {
+  return window.innerWidth <= 768 ? 12 : 24;
+}
+
 // Render Products Grid
 function renderProducts(itemsToRender = PRODUCTS) {
   const container = document.getElementById("productsGrid");
@@ -59,16 +64,18 @@ function renderProducts(itemsToRender = PRODUCTS) {
     return;
   }
 
+  const itemsPerPage = getProductsPerPage();
+
   // Ensure current page is valid
-  const totalPages = Math.ceil(itemsToRender.length / PRODUCTS_PER_PAGE);
+  const totalPages = Math.ceil(itemsToRender.length / itemsPerPage);
   if (currentPage > totalPages) {
     currentPage = 1;
   } else if (currentPage < 1) {
     currentPage = 1;
   }
 
-  const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
-  const endIndex = startIndex + PRODUCTS_PER_PAGE;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
   const paginatedItems = itemsToRender.slice(startIndex, endIndex);
 
   container.innerHTML = paginatedItems.map(product => {
@@ -142,7 +149,8 @@ function renderPagination(totalItems) {
   const container = document.getElementById("paginationContainer");
   if (!container) return;
 
-  const totalPages = Math.ceil(totalItems / PRODUCTS_PER_PAGE);
+  const itemsPerPage = getProductsPerPage();
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   if (totalPages <= 1) {
     container.innerHTML = "";
@@ -258,6 +266,15 @@ function setupEventListeners() {
       filterProducts();
     });
   }
+
+  // Window Resize (Recalculate items per page if switching between mobile/desktop)
+  let resizeTimeout;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      filterProducts(false);
+    }, 150);
+  });
 }
 
 // Filter Logic (Category + Search)
