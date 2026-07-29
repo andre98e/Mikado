@@ -312,6 +312,20 @@ function setupEventListeners() {
   });
 }
 
+// Helper to visually update category tabs active class
+function updateActiveCategoryTab(category) {
+  const container = document.querySelector(".category-tabs");
+  if (!container) return;
+  const tabs = container.querySelectorAll(".tab-btn");
+  tabs.forEach(tab => {
+    if (tab.getAttribute("data-category") === category) {
+      tab.classList.add("active");
+    } else {
+      tab.classList.remove("active");
+    }
+  });
+}
+
 // Filter Logic (Category + Search)
 function filterProducts(resetPage = true) {
   if (resetPage) {
@@ -319,6 +333,12 @@ function filterProducts(resetPage = true) {
   }
   const query = (document.getElementById("searchInput")?.value || "").toLowerCase().trim();
   
+  // If there's a search term, we reset search scope to All ("todos")
+  if (query) {
+    currentCategory = "todos";
+    updateActiveCategoryTab("todos");
+  }
+
   const filtered = PRODUCTS.filter(p => {
     const matchesCategory = (currentCategory === "todos") || (p.category === currentCategory);
     const matchesQuery = !query || 
@@ -328,6 +348,16 @@ function filterProducts(resetPage = true) {
     
     return matchesCategory && matchesQuery;
   });
+
+  // If search matches products belonging to a single unique category, switch tab to it
+  if (query && filtered.length > 0) {
+    const firstCat = filtered[0].category;
+    const allSameCategory = filtered.every(p => p.category === firstCat);
+    if (allSameCategory) {
+      currentCategory = firstCat;
+      updateActiveCategoryTab(firstCat);
+    }
+  }
 
   renderProducts(filtered);
 }
