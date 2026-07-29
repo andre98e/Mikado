@@ -1,5 +1,5 @@
 // Auto-generated catalog from catalogo_mikado.xlsx
-const CATALOG_TIMESTAMP = 1785292472;
+const CATALOG_TIMESTAMP = 1785296441;
 const PRODUCTS_DATA = [
   {
     "id": 1,
@@ -361,7 +361,7 @@ const PRODUCTS_DATA = [
   {
     "id": 22,
     "codigo": "MKD-022",
-    "brand": "DR ALTHEA",
+    "brand": "DR. ALTHEA",
     "title": "Crema 345 Relief - 50ml",
     "category": "hidratantes",
     "price": 100.0,
