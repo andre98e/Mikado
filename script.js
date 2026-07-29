@@ -96,7 +96,7 @@ function renderProducts(itemsToRender = PRODUCTS) {
       </button>
 
       <div class="product-img-box">
-        <img src="${product.img}" alt="${product.title}" loading="lazy" onerror="this.onerror=null; this.src=getProductImageFallback('${product.category}');">
+        <img src="${product.img}" alt="${product.title}" onerror="this.onerror=null; this.src=getProductImageFallback('${product.category}');">
         <div class="quick-view-overlay">
           <button class="btn-quick-view" onclick="openQuickView(${product.id})">
             <i class="fa-solid fa-eye"></i> Vista Rápida

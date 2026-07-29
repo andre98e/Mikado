@@ -785,6 +785,11 @@ img {
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+  will-change: transform;
 }
 
 .product-card:hover .product-img-box img {
