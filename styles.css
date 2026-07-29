@@ -968,6 +968,7 @@ img {
   font-size: 1rem;
   opacity: 0.95;
   max-width: 600px;
+  text-align: justify;
 }
 
 .btn-ws-banner {
@@ -1048,6 +1049,7 @@ img {
   font-size: 0.88rem;
   color: var(--clr-text-muted);
   font-style: italic;
+  text-align: justify;
 }
 
 /* Cart Slide-out Drawer */
@@ -1405,6 +1407,7 @@ img {
   color: var(--clr-text-muted);
   margin-bottom: 24px;
   line-height: 1.5;
+  text-align: justify;
 }
 
 .modal-actions {
@@ -1435,6 +1438,7 @@ img {
   color: #B5AEA7;
   margin-top: 16px;
   max-width: 320px;
+  text-align: justify;
 }
 
 .footer-column h4 {

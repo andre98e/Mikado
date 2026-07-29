@@ -1,5 +1,5 @@
 // Auto-generated catalog from catalogo_mikado.xlsx
-const CATALOG_TIMESTAMP = 1785273987;
+const CATALOG_TIMESTAMP = 1785292472;
 const PRODUCTS_DATA = [
   {
     "id": 1,
@@ -159,7 +159,7 @@ const PRODUCTS_DATA = [
     "codigo": "MKD-010",
     "brand": "BEAUTY OF JOSEON",
     "title": "Sérum Contorno de Ojos Revive Eye Serum - 30ml",
-    "category": "hidratantes",
+    "category": "contorno de ojos",
     "price": 84.0,
     "oldPrice": 90.0,
     "stock": 2,
@@ -295,7 +295,7 @@ const PRODUCTS_DATA = [
     "codigo": "MKD-018",
     "brand": "CELIMAX",
     "title": "Sérum Facial The Vita-A Retinal Shot Tightening Booster - 15ml",
-    "category": "booster",
+    "category": "contorno de ojos",
     "price": 99.0,
     "oldPrice": 125.0,
     "stock": 6,
@@ -618,7 +618,7 @@ const PRODUCTS_DATA = [
     "codigo": "MKD-037",
     "brand": "SEOUL 1988",
     "title": "Retinal Crema Antiedad para Ojos - 30ml",
-    "category": "hidratantes",
+    "category": "contorno de ojos",
     "price": 99.0,
     "oldPrice": 120.0,
     "stock": 4,
@@ -635,7 +635,7 @@ const PRODUCTS_DATA = [
     "codigo": "MKD-038",
     "brand": "SEOUL 1988",
     "title": "Retinal Serum - 30ml",
-    "category": "booster",
+    "category": "serums",
     "price": 105.0,
     "oldPrice": 115.0,
     "stock": 1,
@@ -788,7 +788,7 @@ const PRODUCTS_DATA = [
     "codigo": "MKD-047",
     "brand": "SKIN 1004",
     "title": "Crema de Ojos Madagascar Centella Probio-Cica Bakuchiol - 20ml",
-    "category": "hidratantes",
+    "category": "contorno de ojos",
     "price": 84.0,
     "oldPrice": 99.0,
     "stock": 1,
