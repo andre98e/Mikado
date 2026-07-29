@@ -242,12 +242,22 @@ function renderCategoryTabs() {
 
 // Event Listeners Setup
 function setupEventListeners() {
+  const searchInput = document.getElementById("searchInput");
+  const searchIcon = document.querySelector(".search-icon");
+  let lastScrolledSearchValue = "";
+
   // Category Tabs (using delegation since tabs are dynamic)
   const container = document.querySelector(".category-tabs");
   if (container) {
     container.addEventListener("click", (e) => {
       const tab = e.target.closest(".tab-btn");
       if (!tab) return;
+
+      // Clear search when changing category manually
+      if (searchInput) {
+        searchInput.value = "";
+      }
+      lastScrolledSearchValue = "";
       
       const tabs = container.querySelectorAll(".tab-btn");
       tabs.forEach(t => t.classList.remove("active"));
@@ -258,11 +268,6 @@ function setupEventListeners() {
       filterProducts();
     });
   }
-
-  // Search Input & Search Icon
-  const searchInput = document.getElementById("searchInput");
-  const searchIcon = document.querySelector(".search-icon");
-  let lastScrolledSearchValue = "";
 
   function handleSearchSubmit() {
     filterProducts();
